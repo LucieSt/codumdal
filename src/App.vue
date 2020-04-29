@@ -1,32 +1,12 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" class="app-container">
+
+    <b-nav pills align="center">
+      <b-nav-item active-class="active" to="/" exact>Home</b-nav-item>
+      <b-nav-item active-class="active" to="/recept" exact>Detail receptu</b-nav-item>
+      <b-nav-item active-class="active" to="/novy-recept" exact>Nový recept</b-nav-item>
+    </b-nav>
+
     <router-view/>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
