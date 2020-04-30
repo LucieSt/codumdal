@@ -1,59 +1,58 @@
 <template>
   <div class="recipe-form-component">
-    ahoooj
-    <!-- <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+
+    <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group
         id="input-group-1"
-        label="Email address:"
+        label="název:"
         label-for="input-1"
-        description="We'll never share your email with anyone else."
+        description=""
       >
         <b-form-input
           id="input-1"
-          v-model="form.email"
-          type="email"
+          v-model="recipe.title"
+          type="text"
           required
-          placeholder="Enter email"
+          placeholder=""
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+      <b-form-group id="input-group-2" label="popis:" label-for="input-2">
         <b-form-input
           id="input-2"
-          v-model="form.name"
+          v-model="recipe.directions"
           required
-          placeholder="Enter name"
+          placeholder=""
         ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
       </b-form-group>
 
       <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
+        <b-form-checkbox-group v-model="recipe.categories" id="checkboxes-4">
+          <b-form-checkbox value="Předkrm">Předkrm</b-form-checkbox>
+          <b-form-checkbox value="Polévka">Polévka</b-form-checkbox>
+          <b-form-checkbox value="Hlavní jídlo">Hlavní jídlo</b-form-checkbox>
+          <b-form-checkbox value="Dezert">Dezert</b-form-checkbox>
+          <b-form-checkbox value="Nápoj">Nápoj</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form> -->
+    </b-form>
   </div>
 </template>
 
 <script>
-// export default {
-//   props: {
-//     species: String,
-//     pets: Array
-//   }
-// }
+export default {
+  data () {
+    return {
+      recipe: {
+        title: '',
+        directions: '',
+        categories: []
+      }
+    }
+  }
+}
 
 </script>
