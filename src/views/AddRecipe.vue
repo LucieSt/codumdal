@@ -1,6 +1,8 @@
 <template>
-  <div class="add-recipe-container">
-    Novy recept
+  <div class="add-recipe-view">
+    <div class="round">
+      <h2>přidej nový recept</h2>
+    </div>
     <recipe-form/>
   </div>
 </template>

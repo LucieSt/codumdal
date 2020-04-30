@@ -2,9 +2,13 @@
 
 @import 'base/variables';
 
+// views
+
+@import 'views/app';
+@import 'views/home';
+@import 'views/addRecipe';
+@import 'views/recipe';
+
 // components
 
-@import 'components/app';
-@import 'components/home';
-@import 'components/addRecipe';
-@import 'components/recipe';
+@import 'components/recipeForm'

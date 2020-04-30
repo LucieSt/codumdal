@@ -1,0 +1,24 @@
+
+
+.app-container {
+    // font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: $uppercase-font;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    height: 100vh;
+
+    ul {
+        padding: 30px;
+        background-color: $chinese;
+        box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.06);
+    }
+    a {
+        color: white;
+        font-weight: 600;
+        font-size: $upper-headline;
+    }
+    .nav-link.active {
+        background-color: $orange;
+    }
+  }
