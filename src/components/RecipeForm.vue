@@ -1,7 +1,7 @@
 <template>
   <div class="recipe-form-component">
 
-    <b-form @submit="onSubmit" @reset="onReset">
+    <b-form>
       <b-form-group
         id="input-group-1"
         label="název:"
@@ -39,6 +39,13 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+
+    <div id="preview">
+      <h3>preview of the recipe</h3>
+      <p>nazev: {{ recipe.title }}</p>
+      <p>postup: {{ recipe.directions }}</p>
+    </div>
+
   </div>
 </template>
 

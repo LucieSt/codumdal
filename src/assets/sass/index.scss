@@ -8,7 +8,11 @@
 @import 'views/home';
 @import 'views/addRecipe';
 @import 'views/recipe';
+@import 'views/categories';
+@import 'views/login';
+@import 'views/user';  
 
 // components
 
-@import 'components/recipeForm'
+@import 'components/recipeForm';
+@import 'components/listedRecipes';

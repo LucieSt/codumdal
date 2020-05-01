@@ -1,11 +1,10 @@
 
-
-.app-container {
-    // font-family: Avenir, Helvetica, Arial, sans-serif;
+#app {
     font-family: $uppercase-font;
+    text-align: center;
+    // font-family: Avenir, Helvetica, Arial, sans-serif;
     // -webkit-font-smoothing: antialiased;
     // -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     height: 100vh;
 
     ul {
@@ -21,4 +20,4 @@
     .nav-link.active {
         background-color: $orange;
     }
-  }
+}
