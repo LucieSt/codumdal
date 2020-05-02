@@ -10,6 +10,7 @@ const config = {
   storageBucket: 'codumdal-eacf2.appspot.com',
   messagingSenderId: '784645595316'
 }
+
 firebase.initializeApp(config)
 
 // firebase utils

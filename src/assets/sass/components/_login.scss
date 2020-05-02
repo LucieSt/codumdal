@@ -1,3 +1,39 @@
+body {
+    background-color: $middleblue;
+}
+
 .login-component {
     font-size: $upper-headline;
+    position: fixed;
+    width: 50%;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $grey;
+
+    h1 {
+        margin-bottom: 100px;
+        font-size: $upper-maxiheadline;
+    }
+
+    label {
+        text-align: left;
+    }
+
+    input {
+        font-family: $regular-font;
+    }
+
+    button {
+        font-size: $upper-headline;
+        margin: 50px 0;
+    }
+
+    .extras {
+        text-align: right;
+    }
+
+    a {
+        cursor: pointer;
+    }
 }
