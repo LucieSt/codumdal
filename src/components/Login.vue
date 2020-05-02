@@ -1,9 +1,15 @@
 <template>
   <div class="login-component">
 
-    <h1>codůmdal</h1>
+    <transition name="fade">
+      <div v-if="performingRequest" class="loading">
+        <p>Loading...</p>
+      </div>
+    </transition>
 
     <b-form v-if="showLoginForm" @submit.prevent>
+
+      <h1 class="headline-logo">codůmdal</h1>
 
       <b-form-group
         id="email1"
@@ -36,7 +42,8 @@
       <b-button type="submit" variant="primary" @click="login">Přihlásit se</b-button>
 
       <div class="extras">
-        <a>Zapomenuté heslo | </a>
+        <a>Zapomenuté heslo</a>
+        <span>|</span>
         <a @click="toggleForm">Vytvořit účet</a>
       </div>
 
@@ -44,7 +51,7 @@
 
     <b-form v-if="!showLoginForm" @submit.prevent>
 
-      <h1>Nový účet</h1>
+      <h1 class="signup-headline">Nový účet</h1>
 
       <b-form-group
         id="name"
@@ -130,7 +137,8 @@ export default {
         email: '',
         password: ''
       },
-      showLoginForm: true
+      showLoginForm: true,
+      performingRequest: false
     }
   },
   methods: {
@@ -138,31 +146,37 @@ export default {
       this.showLoginForm = !this.showLoginForm
     },
     login () {
+      this.performingRequest = true
       fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(cred => {
         // cred (credentials) = object with a user (cred.user should work)
         // on resolve
         this.$store.commit('setCurrentUser', cred.user)
         this.$store.dispatch('fetchUserProfile')
+        this.performingRequest = false
         this.$router.push('/')
       }).catch(err => {
         // on reject
+        this.performingRequest = false
         console.log(err)
       })
     },
     signup () {
+      this.performingRequest = true
       fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(cred => {
         this.$store.commit('setCurrentUser', cred.user)
         // create user obj
         fb.usersCollection.doc(cred.user.uid).set({
           name: this.signupForm.name,
-          title: this.signupForm.title
+          surname: this.signupForm.surname
         }).then(() => {
           this.$store.dispatch('fetchUserProfile')
+          this.performingRequest = false
           this.$router.push('/')
         }).catch(err => {
           console.log(err)
         })
       }).catch(err => {
+        this.performingRequest = true
         console.log(err)
       })
     }

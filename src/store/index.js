@@ -11,6 +11,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUserProfile ({ commit, state }) {
+      console.log('fetchuserprofile action')
       fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
         commit('setUserProfile', res.data())
       }).catch(err => {

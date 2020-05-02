@@ -1,19 +1,26 @@
-body {
-    background-color: $middleblue;
-}
 
 .login-component {
     font-size: $upper-headline;
-    position: fixed;
-    width: 50%;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     color: $grey;
+    background-color: $middleblue;
+    min-height: 100vh;
+
+    form {
+        width: 50%;
+        margin: auto;
+    }
+
+    .headline-logo {
+        margin-bottom: 100px;
+    }
+
+    .signup-headline {
+        margin-bottom: 50px;
+    }
 
     h1 {
-        margin-bottom: 100px;
         font-size: $upper-maxiheadline;
+        padding-top: 15vh;
     }
 
     label {
@@ -31,9 +38,36 @@ body {
 
     .extras {
         text-align: right;
+        padding-bottom: 50px;
     }
 
     a {
         cursor: pointer;
+        padding-left: 15px;
+    }
+
+    span {
+        padding-left: 15px;
+        color: white;
+    }
+
+    .loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(#34495E, 0.4);
+        z-index: 9999;
+    
+        p {
+            background: white;
+            width: 150px;
+            text-align: center;
+            margin: 40vh auto 0;
+            padding: 40px 0;
+            border-radius: 3px;
+            box-shadow: 0 0 20px 0 rgba(#34495E, 0.5);
+        }
     }
 }

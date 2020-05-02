@@ -6,6 +6,15 @@
     // -webkit-font-smoothing: antialiased;
     // -moz-osx-font-smoothing: grayscale;
     height: 100vh;
+   
+    ::selection {
+        color: $iceberg;
+        background: $grey;
+    }
+     ::-moz-selection { /* Code for Firefox */
+        color: $iceberg;
+        background: $grey;
+    }
 
     ul {
         padding: 30px;
