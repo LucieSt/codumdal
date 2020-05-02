@@ -2,16 +2,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import firebase from 'firebase'
 
-import Home from '../views/Home.vue'
-import AddRecipe from '../views/AddRecipe.vue'
-import Recipe from '../views/Recipe.vue'
-import Categories from '../views/Categories'
-import Login from '../views/Login'
-import User from '../views/User'
+import Home from '../components/Home.vue'
+import AddRecipe from '../components/AddRecipe.vue'
+import Recipe from '../components/Recipe.vue'
+import Categories from '../components/Categories'
+import Login from '../components/Login'
+import User from '../components/User'
 
 Vue.use(VueRouter)
 
 const routes = [
+  // handling incorrect rotes
+  {
+    path: '*',
+    redirect: '/'
+  },
   {
     path: '/',
     name: 'Home',

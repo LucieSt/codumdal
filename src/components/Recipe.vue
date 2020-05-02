@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-view">
+  <div class="recipe-component">
     Recept
   </div>
 </template>

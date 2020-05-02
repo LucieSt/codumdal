@@ -1,5 +1,5 @@
 <template>
-  <div class="categories-view">
+  <div class="categories-component">
     tady budou jednotlive kategorie
   </div>
 </template>
