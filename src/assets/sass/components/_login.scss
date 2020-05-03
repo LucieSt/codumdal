@@ -6,49 +6,55 @@
     min-height: 100vh;
 
     form {
-        width: 50%;
+        width: 80%;
         margin: auto;
-    }
+        max-width: 500px;
 
-    .headline-logo {
-        margin-bottom: 100px;
-    }
+        .headline-logo {
+            margin-bottom: 100px;
+        }
 
-    .signup-headline {
-        margin-bottom: 50px;
-    }
+        .smaller-headline {
+            margin-bottom: 50px;
+        }
 
-    h1 {
-        font-size: $upper-maxiheadline;
-        padding-top: 15vh;
-    }
+        h1 {
+            font-size: $upper-maxiheadline;
+            padding-top: 15vh;
+        }
 
-    label {
-        text-align: left;
-    }
+        label {
+            text-align: left;
+        }
 
-    input {
-        font-family: $regular-font;
-    }
+        input {
+            font-family: $regular-font;
+        }
 
-    button {
-        font-size: $upper-headline;
-        margin: 50px 0;
-    }
+        button {
+            font-size: $upper-headline;
+            margin: 50px 0;
+        }
 
-    .extras {
-        text-align: right;
-        padding-bottom: 50px;
-    }
+        .extras {
+            text-align: right;
+            padding-bottom: 50px;
 
-    a {
-        cursor: pointer;
-        padding-left: 15px;
-    }
+            a {
+                cursor: pointer;
+                padding-left: 15px;
+            }
 
-    span {
-        padding-left: 15px;
-        color: white;
+            span {
+                padding-left: 15px;
+                color: white;
+            }
+        }
+
+        p {
+            font-weight: 800;
+            padding-bottom: 30px;
+        }
     }
 
     .loading {
@@ -69,5 +75,14 @@
             border-radius: 3px;
             box-shadow: 0 0 20px 0 rgba(#34495E, 0.5);
         }
+    }
+
+    .error-msg {
+        color: $grey;
+        font-weight: 800;
+        max-width: 500px;
+        width: 80%;
+        margin: auto;
+        padding-bottom: 50px;
     }
 }
