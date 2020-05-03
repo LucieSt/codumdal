@@ -3,6 +3,12 @@
     background-color: $aliceblue;
     position: relative;
 
+    .add-recipe-container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 30px;
+    }
+
     .round {
         background-color: $iceberg;
         height: 250px;

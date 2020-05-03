@@ -1,5 +1,7 @@
 <template>
   <div class="categories-component">
-    tady budou jednotlive kategorie
+    <div class="categories-container">
+      tady budou jednotlive kategorie
+    </div>
   </div>
 </template>

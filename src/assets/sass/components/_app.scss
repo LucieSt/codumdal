@@ -6,6 +6,7 @@
     // -webkit-font-smoothing: antialiased;
     // -moz-osx-font-smoothing: grayscale;
     height: 100vh;
+    color: $grey;
    
     ::selection {
         color: $iceberg;
@@ -16,10 +17,16 @@
         background: $grey;
     }
 
-    ul {
-        padding: 30px;
+    .nav-container {
         background-color: $chinese;
         box-shadow: inset 0 -4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    ul {
+        padding: 30px;
+        max-width: 1200px;
+        position: relative;
+        margin: auto;
     }
     a {
         color: white;
@@ -28,5 +35,9 @@
     }
     .nav-link.active {
         background-color: $orange;
+    }
+    .logout-nav {
+        position: absolute;
+        right: 30px;
     }
 }

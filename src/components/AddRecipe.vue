@@ -1,9 +1,11 @@
 <template>
   <div class="add-recipe-component">
-    <div class="round">
-      <h2>přidej nový recept</h2>
+    <div class="add-recipe-container">
+      <div class="round">
+        <h2>přidej nový recept</h2>
+      </div>
+      <recipe-form/>
     </div>
-    <recipe-form/>
   </div>
 </template>
 
