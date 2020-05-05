@@ -25,7 +25,7 @@ db.settings(settings)
 
 // firebase collections
 const usersCollection = db.collection('users')
-const postsCollection = db.collection('posts')
+const recipesCollection = db.collection('recipes')
 const commentsCollection = db.collection('comments')
 const likesCollection = db.collection('likes')
 
@@ -34,7 +34,7 @@ export {
   auth,
   currentUser,
   usersCollection,
-  postsCollection,
+  recipesCollection,
   commentsCollection,
   likesCollection
 }

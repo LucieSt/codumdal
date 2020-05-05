@@ -1,56 +1,64 @@
 <template>
   <div class="recipe-form-component">
 
-    <b-form @submit.prevent>
-      <b-form-group
-        id="input-group-1"
-        label="název:"
-        label-for="input-1"
+    <div v-if="!submited">
+
+      <div class="round">
+        <h2>přidej nový recept</h2>
+      </div>
+
+      <b-form @submit.prevent>
+        <b-form-group
+          id="input-group-1"
+          label="název:"
+          label-for="input-1"
+          description=""
+        >
+          <b-form-input
+            id="input-1"
+            v-model.trim="recipe.title"
+            type="text"
+            required
+            placeholder=""
+          ></b-form-input>
+        </b-form-group>
+
+        <b-form-group
+        class="mb-0 textarea-class"
+        label="Postup:"
+        label-for="textarea"
         description=""
       >
-        <b-form-input
-          id="input-1"
-          v-model.trim="recipe.title"
-          type="text"
-          required
+        <b-form-textarea
+          id="textarea"
+          v-model.trim="recipe.description"
           placeholder=""
-        ></b-form-input>
-      </b-form-group>
+          required
+          rows="3"
+          max-rows="10"
+        ></b-form-textarea>
+        </b-form-group>
 
-      <b-form-group
-      class="mb-0 textarea-class"
-      label="Postup:"
-      label-for="textarea"
-      description=""
-    >
-      <b-form-textarea
-        id="textarea"
-        v-model.trim="recipe.description"
-        placeholder=""
-        required
-        rows="3"
-        max-rows="10"
-      ></b-form-textarea>
-      </b-form-group>
+        <b-form-group id="input-group-4">
+          <b-form-checkbox-group v-model="recipe.categories" id="checkboxes-4">
+            <b-form-checkbox value="Předkrm">Předkrm</b-form-checkbox>
+            <b-form-checkbox value="Polévka">Polévka</b-form-checkbox>
+            <b-form-checkbox value="Hlavní jídlo">Hlavní jídlo</b-form-checkbox>
+            <b-form-checkbox value="Dezert">Dezert</b-form-checkbox>
+            <b-form-checkbox value="Nápoj">Nápoj</b-form-checkbox>
+          </b-form-checkbox-group>
+        </b-form-group>
 
-      <b-form-group id="input-group-4">
-        <b-form-checkbox-group v-model="recipe.categories" id="checkboxes-4">
-          <b-form-checkbox value="Předkrm">Předkrm</b-form-checkbox>
-          <b-form-checkbox value="Polévka">Polévka</b-form-checkbox>
-          <b-form-checkbox value="Hlavní jídlo">Hlavní jídlo</b-form-checkbox>
-          <b-form-checkbox value="Dezert">Dezert</b-form-checkbox>
-          <b-form-checkbox value="Nápoj">Nápoj</b-form-checkbox>
-        </b-form-checkbox-group>
-      </b-form-group>
+        <b-button @click="createRecipe" type="submit" variant="primary">Přidat</b-button>
+      </b-form>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-    </b-form>
+    </div>
 
-    <!-- <div id="preview">
-      <h3>preview of the recipe</h3>
-      <p>nazev: {{ recipe.title }}</p>
-      <p>postup: {{ recipe.directions }}</p>
-    </div> -->
+    <div v-if="submited" class="posted-recipe-message">
+      <h1>Nový recept byl vložen</h1>
+      <b-button variant="info"><router-link v-bind:to="'/recept/' + this.recipeId">zobrazit recept</router-link></b-button>
+    </div>
+
   </div>
 </template>
 
@@ -65,23 +73,31 @@ export default {
         title: '',
         description: '',
         categories: []
-      }
+      },
+      recipeId: '',
+      submited: false
     }
   },
   computed: {
-    ...mapState(['userProfile', 'currentUser'])
+    ...mapState(['userProfile', 'currentUser', 'recipes'])
   },
   methods: {
-    createPost () {
-      fb.postsCollection.add({
+    createRecipe () {
+      fb.recipesCollection.add({
         createdOn: new Date(),
-        content: this.post.content,
+        title: this.recipe.title,
+        description: this.recipe.description,
+        categories: this.recipe.categories,
         userId: this.currentUser.uid,
-        userName: this.userProfile.name,
-        comments: 0,
-        likes: 0
+        userName: this.userProfile.name
       }).then(ref => {
-        this.post.content = ''
+        this.recipe = {
+          title: '',
+          description: '',
+          categories: []
+        }
+        this.recipeId = ref.id
+        this.submited = true
       }).catch(err => {
         console.log(err)
       })

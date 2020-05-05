@@ -1,3 +1,7 @@
 .listed-recipes-component {
     font-size: $upper-headline;
+
+    .title {
+        color: $grey;
+    }
 }

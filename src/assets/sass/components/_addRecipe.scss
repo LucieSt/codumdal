@@ -1,32 +1,11 @@
 .add-recipe-component {
-    padding-top: 30px;
     background-color: $aliceblue;
     position: relative;
 
     .add-recipe-container {
         max-width: 1200px;
+        min-height: calc(100vh - 121px);
         margin: auto;
         padding: 30px;
     }
-
-    .round {
-        background-color: $iceberg;
-        height: 250px;
-        width: 250px;
-        border: 1px solid $iceberg;
-        border-radius: 50%;
-        margin: auto;
-        position: relative;
-        display: flex;
-        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
-        margin-bottom: 30px;
-    }
-    
-    h2 {
-        width: 400px;
-        font-size: $upper-maxiheadline;
-        align-self: center;
-        margin-bottom: 0;
-    }
-
 }

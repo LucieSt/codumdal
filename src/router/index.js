@@ -40,7 +40,7 @@ const routes = [
     }
   },
   {
-    path: '/recept', // /:id ?
+    path: '/recept/:id',
     name: 'Recipe',
     component: Recipe,
     meta: {
