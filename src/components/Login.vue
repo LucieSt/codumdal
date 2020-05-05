@@ -11,6 +11,12 @@
 
       <h1 class="headline-logo">codůmdal</h1>
 
+      <transition name="fade">
+        <div v-if="errorMsg !== ''" class="error-msg">
+          <p>{{ errorMsg }}</p>
+        </div>
+      </transition>
+
       <b-form-group
         id="email1"
         label="Email:"
@@ -52,6 +58,12 @@
     <b-form v-if="!showLoginForm && !showForgotPassword" @submit.prevent>
 
       <h1 class="smaller-headline">Nový účet</h1>
+
+      <transition name="fade">
+        <div v-if="errorMsg !== ''" class="error-msg">
+          <p>{{ errorMsg }}</p>
+        </div>
+      </transition>
 
       <b-form-group
         id="name"
@@ -124,6 +136,12 @@
         <h1 class="smaller-headline">Obnovení hesla</h1>
         <p>Zašleme Vám email s odkazem pro změnu hesla</p>
 
+        <transition name="fade">
+          <div v-if="errorMsg !== ''" class="error-msg">
+            <p>{{ errorMsg }}</p>
+          </div>
+        </transition>
+
         <b-form-group
           id="email3"
           label="Email:"
@@ -156,12 +174,6 @@
       </div>
 
     </b-form>
-
-    <transition name="fade">
-      <div v-if="errorMsg !== ''" class="error-msg">
-        <p>{{ errorMsg }}</p>
-      </div>
-    </transition>
 
   </div>
 </template>
@@ -262,7 +274,6 @@ export default {
         this.passwordResetSuccess = true
         this.passwordForm.email = ''
       }).catch(err => {
-        console.log(err)
         this.performingRequest = false
         this.errorMsg = err.message
       })

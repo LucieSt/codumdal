@@ -1,6 +1,10 @@
 .recipe-form-component {
     font-size: $upper-headline;
-    width: 50%;
+    max-width: 800px;
     margin: auto;
     padding-bottom: 50px;
+
+    .textarea-class {
+        padding-bottom: 30px;
+    }
 }

@@ -55,6 +55,18 @@
             font-weight: 800;
             padding-bottom: 30px;
         }
+        
+        .error-msg {
+        color: $grey;
+        font-weight: 800;
+        max-width: 500px;
+        width: 80%;
+        margin: auto;
+
+        p {
+            padding-bottom: 0;
+        }
+    }
     }
 
     .loading {
@@ -75,14 +87,5 @@
             border-radius: 3px;
             box-shadow: 0 0 20px 0 rgba(#34495E, 0.5);
         }
-    }
-
-    .error-msg {
-        color: $grey;
-        font-weight: 800;
-        max-width: 500px;
-        width: 80%;
-        margin: auto;
-        padding-bottom: 50px;
     }
 }
