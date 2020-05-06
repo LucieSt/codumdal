@@ -27,6 +27,16 @@ fb.auth.onAuthStateChanged(user => {
         store.commit('setRecipes', recipesArray)
       }
     })
+
+    fb.categoriesCollection.get().then(snap => {
+      const categoriesArray = []
+      snap.forEach(doc => {
+        const category = doc.data()
+        category.id = doc.id
+        categoriesArray.push(category)
+      })
+      store.commit('setCategories', categoriesArray)
+    })
   }
 })
 
@@ -35,7 +45,8 @@ export const store = new Vuex.Store({
     currentUser: null,
     userProfile: {},
     recipes: [],
-    hiddenRecipes: []
+    hiddenRecipes: [],
+    categories: []
   },
   actions: {
     clearData ({ commit }) {
@@ -74,6 +85,13 @@ export const store = new Vuex.Store({
         }
       } else {
         state.hiddenRecipes = []
+      }
+    },
+    setCategories (state, val) {
+      if (val) {
+        state.categories = val
+      } else {
+        state.categories = []
       }
     }
   },

@@ -56,6 +56,14 @@ const routes = [
     }
   },
   {
+    path: '/kategorie/:id',
+    name: 'Categories',
+    component: Categories,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/uzivatel',
     name: 'User',
     component: User,
