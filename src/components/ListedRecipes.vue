@@ -1,8 +1,18 @@
 <template>
   <div class="listed-recipes-component">
-    <div v-for="(recipe, index) in this.recipes" class="recipe-li" :key="index">
-      <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
-      <article>{{ recipe.userName }}</article>
+
+    <div v-if="hiddenRecipes.length">
+      <div v-for="(hiddenRecipe, index) in this.hiddenRecipes" class="recipe-li" :key="index">
+        <router-link v-bind:to="'/recept/' + hiddenRecipe.id"><h2 class="title">{{ hiddenRecipe.title }}</h2></router-link>
+        <article>{{ hiddenRecipe.userName }}</article>
+      </div>
+    </div>
+
+    <div v-if="recipes.length">
+      <div v-for="(recipe, index) in this.recipes" class="recipe-li" :key="index">
+        <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
+        <article>{{ recipe.userName }}</article>
+      </div>
     </div>
   </div>
 </template>
@@ -17,21 +27,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['userProfile', 'currentUser', 'recipes'])
+    ...mapState(['userProfile', 'currentUser', 'recipes', 'hiddenRecipes'])
   },
   methods: {
-    // haha () {
-    //   console.log(fb)
-    // }
   }
-  // created () {
-  //   fb.recipesCollection.get().then((snapshot) => {
-  //     snapshot.docs.forEach((doc, index) => {
-  //       this.recipes.push(doc.data())
-  //       this.recipes[index].id = doc.id
-  //     })
-  //   })
-  // }
 }
 
 </script>

@@ -12,27 +12,21 @@ fb.auth.onAuthStateChanged(user => {
     store.dispatch('fetchUserProfile')
 
     fb.recipesCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
-      const recipesArray = []
-      const changes = snapshot.docChanges()
-      changes.forEach(change => {
-        const recipe = change.doc.data()
-        recipe.id = change.doc.id
-        recipesArray.push(recipe)
-      })
-      console.log(recipesArray)
-      store.commit('setRecipes', recipesArray)
+      if (snapshot.docChanges().length !== snapshot.docs.length) {
+        const recipe = snapshot.docChanges()[0].doc.data()
+        recipe.id = snapshot.docChanges()[0].doc.id
+        store.commit('setHiddenRecipes', recipe)
+      } else {
+        const changes = snapshot.docChanges()
+        const recipesArray = []
+        changes.forEach(change => {
+          const recipe = change.doc.data()
+          recipe.id = change.doc.id
+          recipesArray.push(recipe)
+        })
+        store.commit('setRecipes', recipesArray)
+      }
     })
-
-    // fb.recipesCollection.orderBy('createdOn', 'desc').get().then((snapshot) => {
-    //   console.log(snapshot.docs)
-    //   const recipesArray = []
-    //   snapshot.docs.forEach(doc => {
-    //     const recipe = doc.data()
-    //     recipe.id = doc.id
-    //     recipesArray.push(recipe)
-    //   })
-    //   store.commit('setRecipes', recipesArray)
-    // })
   }
 })
 
@@ -40,12 +34,15 @@ export const store = new Vuex.Store({
   state: {
     currentUser: null,
     userProfile: {},
-    recipes: []
+    recipes: [],
+    hiddenRecipes: []
   },
   actions: {
     clearData ({ commit }) {
       commit('setCurrentUser', null)
       commit('setUserProfile', {})
+      commit('setRecipes', null)
+      commit('setHiddenRecipes', null)
     },
     fetchUserProfile ({ commit, state }) {
       fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
@@ -67,6 +64,16 @@ export const store = new Vuex.Store({
         state.recipes = val
       } else {
         state.recipes = []
+      }
+    },
+    setHiddenRecipes (state, val) {
+      if (val) {
+        // make sure not to add duplicates
+        if (!state.hiddenRecipes.some(x => x.id === val.id)) {
+          state.hiddenRecipes.unshift(val)
+        }
+      } else {
+        state.hiddenRecipes = []
       }
     }
   },
