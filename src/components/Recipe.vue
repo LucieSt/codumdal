@@ -7,6 +7,10 @@
         <ul>
           <li v-for="(category, index) in recipe.categories" :key="index">{{ category }}</li>
         </ul><br>
+        <article>Ingredience:</article>
+        <ul>
+          <li v-for="(ingredient, index) in recipe.ingredients" :key="index">{{ ingredient }}</li>
+        </ul><br>
         <article>{{ recipe.description }}</article>
       </div>
     </div>
@@ -31,6 +35,7 @@ export default {
     fb.recipesCollection.doc(this.id).get().then((doc) => {
       this.recipe = doc.data()
     })
+    // console.log(this.recipe)
   },
   computed: {
     ...mapState(['userProfile', 'currentUser', 'recipes'])

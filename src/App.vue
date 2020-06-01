@@ -5,6 +5,7 @@
         <b-nav-item active-class="active" to="/" exact>Domů</b-nav-item>
         <b-nav-item active-class="active" to="/kategorie" exact>Kategorie</b-nav-item>
         <b-nav-item active-class="active" to="/novy-recept" exact>Nový recept</b-nav-item>
+        <b-nav-item @click="logout" class="user-nav"></b-nav-item>
         <b-nav-item @click="logout" class="logout-nav">Odhlásit</b-nav-item>
       </b-nav>
     </div>
@@ -32,3 +33,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.user-nav a {
+  background: url('./assets/user.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  position: absolute;
+  right: 135px;
+  top: 45px;
+  fill: white;
+}
+</style>

@@ -49,6 +49,19 @@
           </b-form-checkbox-group>
         </b-form-group>
 
+        <div>
+          <b-form-input type="search" v-model.trim="search" @input="filterIngredients" placeholder="ingredience"></b-form-input>
+          <div v-if="filteredIngredients !== [] && search">
+            <ul>
+              <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div v-for="(ing, index) in ingList" :key="index">{{ ing }}</div>
+        </div>
+
         <b-button @click="createRecipe" type="submit" variant="primary">Přidat</b-button>
       </b-form>
 
@@ -64,6 +77,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import ingredients from '@/data/ingredients'
+
 const fb = require('../firebaseConfig.js')
 
 export default {
@@ -75,7 +90,11 @@ export default {
         categories: []
       },
       recipeId: '',
-      submited: false
+      submited: false,
+      search: '',
+      ingredients,
+      filteredIngredients: [],
+      ingList: []
     }
   },
   computed: {
@@ -88,6 +107,7 @@ export default {
         title: this.recipe.title,
         description: this.recipe.description,
         categories: this.recipe.categories,
+        ingredients: this.ingList,
         userId: this.currentUser.uid,
         userName: this.userProfile.name
       }).then(ref => {
@@ -101,6 +121,16 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    filterIngredients (input) {
+      this.filteredIngredients = this.ingredients.filter(ingredient => {
+        return ingredient.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
+    setIngredient (ingredient) {
+      this.ingList.push(ingredient)
+      this.search = ''
+      this.filteredIngredients = []
     }
   }
 }

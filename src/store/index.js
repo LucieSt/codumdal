@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
 
 const fb = require('./../firebaseConfig.js')
 
 Vue.use(Vuex)
+
+Vue.axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com/posts'
 
 // handle the page reload
 fb.auth.onAuthStateChanged(user => {
@@ -46,7 +52,8 @@ export const store = new Vuex.Store({
     userProfile: {},
     recipes: [],
     hiddenRecipes: [],
-    categories: []
+    categories: [],
+    posts: []
   },
   actions: {
     clearData ({ commit }) {
@@ -60,6 +67,13 @@ export const store = new Vuex.Store({
         commit('setUserProfile', res.data())
       }).catch(err => {
         console.log(err)
+      })
+    },
+    loadPosts ({ commit }) {
+      Vue.axios.get().then(result => {
+        commit('SAVE_POSTS', result.data)
+      }).catch(error => {
+        throw new Error(`API ${error}`)
       })
     }
   },
@@ -93,6 +107,9 @@ export const store = new Vuex.Store({
       } else {
         state.categories = []
       }
+    },
+    SAVE_POSTS (state, posts) {
+      state.posts = posts
     }
   },
   modules: {
