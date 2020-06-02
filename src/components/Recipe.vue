@@ -9,7 +9,7 @@
         </ul><br>
         <article>Ingredience:</article>
         <ul>
-          <li v-for="(ingredient, index) in recipe.ingredients" :key="index">{{ ingredient }}</li>
+          <li v-for="(ingredient, index) in recipe.ingredients" :key="index">{{ ingredient.ingredient }} {{ ingredient.quantity }}</li>
         </ul><br>
         <article>{{ recipe.description }}</article>
       </div>

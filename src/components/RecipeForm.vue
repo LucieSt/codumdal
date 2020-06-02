@@ -59,7 +59,13 @@
         </div>
 
         <div>
-          <div v-for="(ing, index) in ingList" :key="index">{{ ing }}</div>
+          <div class="ingredient" v-for="(ing, index) in ingList" :key="index">
+            <div class="ing">
+              <span>{{ ing }}</span>
+            </div>
+            <div class="quantity">
+              <b-form-input type="text" class="input-quantity"></b-form-input>
+            </div></div>
         </div>
 
         <b-button @click="createRecipe" type="submit" variant="primary">Přidat</b-button>
@@ -94,7 +100,8 @@ export default {
       search: '',
       ingredients,
       filteredIngredients: [],
-      ingList: []
+      ingList: [],
+      ingredientsNew: []
     }
   },
   computed: {
@@ -102,12 +109,18 @@ export default {
   },
   methods: {
     createRecipe () {
+      const ingreds = document.getElementsByClassName('ingredient')
+      ingreds.forEach(ingred => {
+        const span = ingred.querySelector('span').innerText
+        const input = ingred.querySelector('input').value
+        this.ingredientsNew.push({ ingredient: span, quantity: input })
+      })
       fb.recipesCollection.add({
         createdOn: new Date(),
         title: this.recipe.title,
         description: this.recipe.description,
         categories: this.recipe.categories,
-        ingredients: this.ingList,
+        ingredients: this.ingredientsNew,
         userId: this.currentUser.uid,
         userName: this.userProfile.name
       }).then(ref => {

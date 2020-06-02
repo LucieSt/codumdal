@@ -37,4 +37,32 @@
     button {
         font-size: $upper-headline;
     }
+
+    div.quantity {
+        text-align: left;
+    }
+
+    .input-quantity {
+        margin-left: 10px;
+        vertical-align: middle;
+        padding-left: 10px;
+        width: 100px;
+        display: inline-block;
+    }
+
+    div.ingredient {
+        padding: 10px;
+        display: flex;
+        div {
+            width: 50%;
+
+            span {
+                padding-right: 10px;
+            }
+        }
+    }
+
+    div.ing {
+        text-align: right;
+    }
 }
