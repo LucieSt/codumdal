@@ -11,6 +11,17 @@ import './assets/sass/index.scss'
 
 const fb = require('./firebaseConfig.js')
 
+// var YouTubeIframeLoader = require('youtube-iframe')
+
+// YouTubeIframeLoader.load(function (YT) {
+//   // eslint-disable-next-line no-new
+//   new YT.Player('player1', {
+//     height: '390',
+//     width: '640',
+//     videoId: 'M7lc1UVf-VE'
+//   })
+// })
+
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin

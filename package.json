@@ -5,20 +5,24 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "rm -rf node_modules/soundcloud && git clone https://github.com/soundcloud/soundcloud-javascript.git node_modules/soundcloud"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.13.0",
     "core-js": "^3.6.4",
     "firebase": "^7.14.2",
+    "jquery": "^3.5.1",
     "osmosis": "^1.1.10",
     "puppeteer": "^3.2.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.1.6",
     "vuex": "^3.1.3",
-    "ws": "^7.3.0"
+    "ws": "^7.3.0",
+    "youtube-iframe": "^1.0.3",
+    "youtube-player": "^5.5.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
