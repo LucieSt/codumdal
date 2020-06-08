@@ -24,10 +24,6 @@
         margin-bottom: 0;
     }
 
-    .textarea-class {
-        padding-bottom: 30px;
-    }
-
     .posted-recipe-message {
         h1 {
             padding: 30px 0;
@@ -36,6 +32,7 @@
 
     button {
         font-size: $upper-headline;
+        margin-top: 20px;
     }
 
     div.quantity {
@@ -50,8 +47,11 @@
         display: inline-block;
     }
 
+    .form-control {
+        margin-bottom: 30px;
+    }
+
     div.ingredient {
-        padding: 10px;
         display: flex;
         div {
             width: 50%;
@@ -62,7 +62,19 @@
         }
     }
 
+    .filtered-ingredient {
+        cursor: pointer;
+    }
+
     div.ing {
         text-align: right;
+    }
+
+    #input-group-4 {
+        margin-bottom: 40px;
+    }
+
+    ul#filtered-list {
+        padding: 0;
     }
 }

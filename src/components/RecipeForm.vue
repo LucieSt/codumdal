@@ -7,7 +7,7 @@
         <h2>přidej nový recept</h2>
       </div>
 
-      <b-form @submit.prevent>
+      <b-form-group @submit.prevent>
         <b-form-group
           id="input-group-1"
           label="název:"
@@ -39,6 +39,22 @@
         ></b-form-textarea>
         </b-form-group>
 
+        <b-form-group
+        class="mb-0 url-class"
+        label="YouTube URL adresa hudby nebo videa:"
+        label-for="url"
+        description=""
+      >
+
+        <b-form-input
+        id="url"
+        type="url"
+        v-model.trim="videoUrl"
+        ></b-form-input>
+        </b-form-group>
+
+        <h3 class="categories-title">Kategorie</h3>
+
         <b-form-group id="input-group-4">
           <b-form-checkbox-group v-model="recipe.categories" id="checkboxes-4">
             <b-form-checkbox value="Předkrm">Předkrm</b-form-checkbox>
@@ -50,10 +66,13 @@
         </b-form-group>
 
         <div>
-          <b-form-input type="search" v-model.trim="search" @input="filterIngredients" placeholder="ingredience"></b-form-input>
-          <div v-if="filteredIngredients !== [] && search">
-            <ul>
-              <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
+
+          <h3>Ingredience</h3>
+
+          <b-form-input type="search" v-model.trim="search" @input="filterIngredients" placeholder="napiš a vyber ingredienci"></b-form-input>
+          <div v-show="filteredIngredients !== [] && search.length > 1">
+            <ul id="filtered-list">
+              <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
             </ul>
           </div>
         </div>
@@ -64,12 +83,14 @@
               <span>{{ ing }}</span>
             </div>
             <div class="quantity">
-              <b-form-input type="text" class="input-quantity"></b-form-input>
-            </div></div>
+              <b-form-input type="text" placeholder="množství" class="input-quantity"></b-form-input>
+              <div class="close"></div>
+            </div>
+          </div>
         </div>
 
         <b-button @click="createRecipe" type="submit" variant="primary">Přidat</b-button>
-      </b-form>
+      </b-form-group>
 
     </div>
 
@@ -101,7 +122,8 @@ export default {
       ingredients,
       filteredIngredients: [],
       ingList: [],
-      ingredientsNew: []
+      ingredientsNew: [],
+      videoUrl: ''
     }
   },
   computed: {
@@ -122,7 +144,8 @@ export default {
         categories: this.recipe.categories,
         ingredients: this.ingredientsNew,
         userId: this.currentUser.uid,
-        userName: this.userProfile.name
+        userName: this.userProfile.name,
+        videoID: this.getVideoID(this.videoUrl)
       }).then(ref => {
         this.recipe = {
           title: '',
@@ -131,6 +154,10 @@ export default {
         }
         this.recipeId = ref.id
         this.submited = true
+        this.ingredientsNew = []
+        this.ingList = []
+        this.filteredIngredients = []
+        this.search = ''
       }).catch(err => {
         console.log(err)
       })
@@ -144,8 +171,30 @@ export default {
       this.ingList.push(ingredient)
       this.search = ''
       this.filteredIngredients = []
+    },
+    getVideoID (videoUrl) {
+      let videoID = videoUrl.split('v=')[1]
+      console.log(videoID)
+      const ampersandPosition = videoID.indexOf('&')
+      if (ampersandPosition !== -1) {
+        videoID = videoID.substring(0, ampersandPosition)
+      }
+      return videoID
     }
   }
 }
 
 </script>
+
+<style scoped>
+.close {
+  background: url('./../assets/close.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  /* position: absolute;
+  right: 135px;
+  top: 45px; */
+  fill: black;
+}
+</style>

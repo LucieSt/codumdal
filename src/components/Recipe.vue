@@ -20,8 +20,9 @@
 <script>
 // Imports
 import { mapState } from 'vuex'
+import YouTubePlayer from 'youtube-player'
+
 const fb = require('../firebaseConfig.js')
-var YouTubeIframeLoader = require('youtube-iframe')
 
 // Exports
 export default {
@@ -41,15 +42,10 @@ export default {
   computed: {
     ...mapState(['userProfile', 'currentUser', 'recipes'])
   },
-  mounted () {
-    YouTubeIframeLoader.load(function (YT) {
-      // eslint-disable-next-line no-new
-      new YT.Player('player', {
-        height: '390',
-        width: '640',
-        videoId: 'M7lc1UVf-VE'
-      })
-    })
+  updated () {
+    const player = YouTubePlayer('player')
+    console.log(this.recipe.videoID)
+    player.loadVideoById(this.recipe.videoID)
   }
 }
 </script>

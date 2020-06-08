@@ -7,6 +7,11 @@
     // -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     color: $grey;
+
+    h3 {
+        font-size: 35px;
+        padding-bottom: 20px;
+    }
    
     ::selection {
         color: $iceberg;
