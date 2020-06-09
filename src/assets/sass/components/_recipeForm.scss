@@ -37,6 +37,7 @@
 
     div.quantity {
         text-align: left;
+        position: relative;
     }
 
     .input-quantity {
@@ -51,7 +52,7 @@
         margin-bottom: 30px;
     }
 
-    div.ingredient {
+    .ingredient {
         display: flex;
         div {
             width: 50%;
@@ -64,6 +65,9 @@
 
     .filtered-ingredient {
         cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
     }
 
     div.ing {
@@ -76,5 +80,18 @@
 
     ul#filtered-list {
         padding: 0;
+    }
+
+    div.closes {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 130px;
+        top: 10px;
+        fill: black;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.5;
+        }
     }
 }

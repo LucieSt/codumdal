@@ -18,6 +18,7 @@
             id="input-1"
             v-model.trim="recipe.title"
             type="text"
+            autocomplete="off"
             required
             placeholder=""
           ></b-form-input>
@@ -33,6 +34,7 @@
           id="textarea"
           v-model.trim="recipe.description"
           placeholder=""
+          autocomplete="off"
           required
           rows="3"
           max-rows="10"
@@ -49,6 +51,7 @@
         <b-form-input
         id="url"
         type="url"
+        autocomplete="off"
         v-model.trim="videoUrl"
         ></b-form-input>
         </b-form-group>
@@ -69,7 +72,7 @@
 
           <h3>Ingredience</h3>
 
-          <b-form-input type="search" v-model.trim="search" @input="filterIngredients" placeholder="napiš a vyber ingredienci"></b-form-input>
+          <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="napiš a vyber ingredienci"></b-form-input>
           <div v-show="filteredIngredients !== [] && search.length > 1">
             <ul id="filtered-list">
               <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
@@ -83,8 +86,8 @@
               <span>{{ ing }}</span>
             </div>
             <div class="quantity">
-              <b-form-input type="text" placeholder="množství" class="input-quantity"></b-form-input>
-              <div class="close"></div>
+              <b-form-input type="text" autocomplete="off" placeholder="množství" class="input-quantity"></b-form-input>
+              <div @click="removeItem" class="closes"></div>
             </div>
           </div>
         </div>
@@ -168,9 +171,16 @@ export default {
       })
     },
     setIngredient (ingredient) {
-      this.ingList.push(ingredient)
-      this.search = ''
-      this.filteredIngredients = []
+      if (!this.ingList.includes(ingredient)) {
+        this.ingList.push(ingredient)
+        this.search = ''
+        this.filteredIngredients = []
+      } // else hlaska o tom ze uz tu ingredienci pridal
+    },
+    removeItem (event) {
+      const item = event.target.parentElement.parentElement.firstElementChild.innerText
+      const index = this.ingList.indexOf(item)
+      this.ingList.splice(index, 1)
     },
     getVideoID (videoUrl) {
       let videoID = videoUrl.split('v=')[1]
@@ -187,14 +197,9 @@ export default {
 </script>
 
 <style scoped>
-.close {
+.closes {
   background: url('./../assets/close.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  height: 30px;
-  /* position: absolute;
-  right: 135px;
-  top: 45px; */
-  fill: black;
 }
 </style>
