@@ -94,4 +94,13 @@
             opacity: 0.5;
         }
     }
+
+    .ingredients-block {
+        max-height: 320px;
+        overflow: auto;
+    }
+
+    .chosen-ingredients {
+        padding-top: 30px;
+    }
 }

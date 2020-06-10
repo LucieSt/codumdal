@@ -4,4 +4,46 @@
     .title {
         color: $grey;
     }
+
+    .ingredients-block {
+        margin-top: 30px;
+        max-height: 320px;
+        overflow: auto;
+    }
+
+    .recipes-block {
+        padding-top: 50px;
+    }
+
+    ul#filtered-list {
+        padding: 0;
+    }
+
+    .filtered-ingredient {
+        cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    .chosen-ingredients {
+        padding-top: 30px;
+    }
+
+    .find-recipes {
+        margin-top: 30px;
+        font-size: 30px;
+    }
+
+    div.closes {
+        width: 20px;
+        height: 20px;
+        fill: black;
+        display: inline-block;
+        margin-left: 30px;
+        &:hover {
+            cursor: pointer;
+            opacity: 0.5;
+        }
+    }
 }

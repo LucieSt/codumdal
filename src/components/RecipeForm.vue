@@ -73,14 +73,14 @@
           <h3>Ingredience</h3>
 
           <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="napiš a vyber ingredienci"></b-form-input>
-          <div v-show="filteredIngredients !== [] && search.length > 1">
+          <div class="ingredients-block" v-show="filteredIngredients !== [] && search.length > 1">
             <ul id="filtered-list">
               <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
             </ul>
           </div>
         </div>
 
-        <div>
+        <div class="chosen-ingredients">
           <div class="ingredient" v-for="(ing, index) in ingList" :key="index">
             <div class="ing">
               <span>{{ ing }}</span>
@@ -169,6 +169,8 @@ export default {
       this.filteredIngredients = this.ingredients.filter(ingredient => {
         return ingredient.toLowerCase().includes(this.search.toLowerCase())
       })
+      const block = document.querySelector('.ingredients-block')
+      block.scrollTop = 0
     },
     setIngredient (ingredient) {
       if (!this.ingList.includes(ingredient)) {

@@ -4,6 +4,8 @@
 
       <h1>codůmdal</h1>
 
+      <h2>Zadejte ingredience, které máte doma:</h2>
+
       <!-- client_id (soundcloud): "j34j8UCuL4LaOnjnyNb8VBOStI1RrtPI" -->
 
       <!-- <div id="player"></div> -->
