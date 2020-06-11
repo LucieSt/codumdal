@@ -11,9 +11,7 @@
       <!-- <div id="player"></div> -->
 
       <!-- Bude tu hlavne vyhledavani receptu podle zadanych ingredienci, mozna nejake graficke demo, jak na to. Tri obrazky vedle sebe? 1. ruka drzi pivo, 2. "Sele na pivu: mate pivo, chybi sele" 3. ?? -->
-      <keep-alive>
-        <listed-recipes/>
-      </keep-alive>
+      <listed-recipes/>
     </div>
   </div>
 </template>

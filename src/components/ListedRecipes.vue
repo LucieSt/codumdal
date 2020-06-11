@@ -2,7 +2,7 @@
   <div class="listed-recipes-component">
 
     <div>
-      <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="hledat podle ingredianci"></b-form-input>
+      <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="např. Ananasový džus"></b-form-input>
       <div class="ingredients-block" v-if="filteredIngredients !== [] && search">
         <ul id="filtered-list">
           <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
@@ -76,18 +76,11 @@ export default {
       this.showFilteredRecipes()
     },
     showFilteredRecipes () {
-      console.log(this.ingList)
       this.filteredRecipes = []
       this.recipes.forEach(recipe => {
-        this.ingList.forEach(ingredient => {
-          if (recipe.ingredientsFind.includes(ingredient) && !this.filteredRecipes.includes(recipe)) {
-            console.log(recipe)
-            this.filteredRecipes.push(recipe)
-          } else if (!recipe.ingredientsFind.includes(ingredient) && this.filteredRecipes.includes(recipe)) {
-            const index = this.filteredRecipes.indexOf(recipe)
-            this.filteredRecipes.splice(index, 1)
-          }
-        })
+        if (this.ingList.every(ingredient => recipe.ingredientsFind.includes(ingredient))) {
+          this.filteredRecipes.push(recipe)
+        }
       })
     }
   },

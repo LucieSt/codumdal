@@ -9,7 +9,9 @@
         <b-nav-item @click="logout" class="logout-nav">Odhlásit</b-nav-item>
       </b-nav>
     </div>
-    <router-view/>
+    <keep-alive include="Home">
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
