@@ -21,14 +21,14 @@
       <div v-if="hiddenRecipes.length">
         <div v-for="(hiddenRecipe, index) in this.hiddenRecipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + hiddenRecipe.id"><h2 class="title">{{ hiddenRecipe.title }}</h2></router-link>
-          <article>od {{ hiddenRecipe.userName }}</article>
+          <article class="from">od {{ hiddenRecipe.userName }}</article>
         </div>
       </div>
 
-      <div v-if="recipes.length">
-        <div v-for="(recipe, index) in this.recipes" class="recipe-li" :key="index">
+      <div v-if="filteredRecipes.length && ingList.length">
+        <div v-for="(recipe, index) in this.filteredRecipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
-          <article>od {{ recipe.userName }}</article>
+          <article class="from">od {{ recipe.userName }}</article>
         </div>
       </div>
 
@@ -48,7 +48,8 @@ export default {
       ingredients,
       search: '',
       filteredIngredients: [],
-      ingList: []
+      ingList: [],
+      filteredRecipes: []
     }
   },
   computed: {
@@ -76,6 +77,18 @@ export default {
     },
     showFilteredRecipes () {
       console.log(this.ingList)
+      this.filteredRecipes = []
+      this.recipes.forEach(recipe => {
+        this.ingList.forEach(ingredient => {
+          if (recipe.ingredientsFind.includes(ingredient) && !this.filteredRecipes.includes(recipe)) {
+            console.log(recipe)
+            this.filteredRecipes.push(recipe)
+          } else if (!recipe.ingredientsFind.includes(ingredient) && this.filteredRecipes.includes(recipe)) {
+            const index = this.filteredRecipes.indexOf(recipe)
+            this.filteredRecipes.splice(index, 1)
+          }
+        })
+      })
     }
   },
   created () {

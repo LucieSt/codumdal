@@ -126,7 +126,8 @@ export default {
       filteredIngredients: [],
       ingList: [],
       ingredientsNew: [],
-      videoUrl: ''
+      videoUrl: '',
+      ingredientsFind: []
     }
   },
   computed: {
@@ -139,6 +140,7 @@ export default {
         const span = ingred.querySelector('span').innerText
         const input = ingred.querySelector('input').value
         this.ingredientsNew.push({ ingredient: span, quantity: input })
+        this.ingredientsFind.push(span)
       })
       fb.recipesCollection.add({
         createdOn: new Date(),
@@ -146,6 +148,7 @@ export default {
         description: this.recipe.description,
         categories: this.recipe.categories,
         ingredients: this.ingredientsNew,
+        ingredientsFind: this.ingredientsFind,
         userId: this.currentUser.uid,
         userName: this.userProfile.name,
         videoID: this.getVideoID(this.videoUrl)

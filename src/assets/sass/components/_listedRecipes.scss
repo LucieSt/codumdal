@@ -3,6 +3,14 @@
 
     .title {
         color: $grey;
+        font-weight: bold;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    .from {
+        font-size: 20px;
     }
 
     .ingredients-block {
@@ -45,5 +53,9 @@
             cursor: pointer;
             opacity: 0.5;
         }
+    }
+
+    .recipe-li {
+        padding-bottom: 20px;
     }
 }
