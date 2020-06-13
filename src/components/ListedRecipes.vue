@@ -20,21 +20,28 @@
 
     <div class="recipes-block">
 
-      <div v-if="hiddenRecipes.length && !ingList.length">
+      <!-- <div v-if="hiddenRecipes.length && !ingList.length">
         <div v-for="(hiddenRecipe, index) in this.hiddenRecipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + hiddenRecipe.id"><h2 class="title">{{ hiddenRecipe.title }}</h2></router-link>
           <article class="from">od {{ hiddenRecipe.userName }}</article>
         </div>
-      </div>
+      </div> -->
 
-      <div v-if="!ingList.length">
+      <div v-if="!ingList.length && (!filteredCategoryRecipes.length || main)">
         <div v-for="(recipe, index) in this.recipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
           <article class="from">od {{ recipe.userName }}</article>
         </div>
       </div>
 
-      <div v-if="filteredRecipes.length && ingList.length">
+      <div v-if="filteredCategoryRecipes.length && !main">
+        <div v-for="(recipe, index) in this.filteredCategoryRecipes" class="recipe-li" :key="index">
+          <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
+          <article class="from">od {{ recipe.userName }}</article>
+        </div>
+      </div>
+
+      <div v-if="filteredRecipes.length && ingList.length && main">
         <div v-for="(recipe, index) in this.filteredRecipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
           <article class="from">od {{ recipe.userName }}</article>
@@ -58,7 +65,15 @@ export default {
       search: '',
       filteredIngredients: [],
       ingList: [],
-      filteredRecipes: []
+      filteredRecipes: [],
+      categoryList: {
+        hlavnijidla: 'Hlavní jídlo',
+        polevky: 'Polévka',
+        predkrmy: 'Předkrm',
+        napoje: 'Nápoj',
+        dezerty: 'Dezert'
+      },
+      filteredCategoryRecipes: []
     }
   },
   computed: {
@@ -89,6 +104,7 @@ export default {
     },
     showFilteredRecipes () {
       this.filteredRecipes = []
+      // TODO prepsat do filter method
       this.recipes.forEach(recipe => {
         if (this.ingList.every(ingredient => recipe.ingredientsFind.includes(ingredient))) {
           this.filteredRecipes.push(recipe)
@@ -102,7 +118,15 @@ export default {
   watch: {
     '$route.params.id': function (id) {
       if (this.$route.path !== '/') {
-        console.log(id)
+        this.filteredCategoryRecipes = []
+        this.recipes.forEach(recipe => {
+          if (recipe.categories.includes(this.categoryList[id])) {
+            this.filteredCategoryRecipes.push(recipe)
+          }
+        })
+        console.log(this.categoryList[id])
+      } else {
+        console.log('main')
       }
     }
   }
