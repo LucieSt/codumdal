@@ -43,9 +43,10 @@ export default {
     ...mapState(['userProfile', 'currentUser', 'recipes'])
   },
   updated () {
-    const player = YouTubePlayer('player')
-    console.log(this.recipe.videoID)
-    player.loadVideoById(this.recipe.videoID)
+    if (this.recipe.videoID) {
+      const player = YouTubePlayer('player')
+      player.cueVideoById(this.recipe.videoID) // pro autoplay zamenit za loadVideoById
+    }
   }
 }
 </script>

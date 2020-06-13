@@ -1,27 +1,36 @@
 <template>
   <div class="listed-recipes-component">
 
-    <div>
-      <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="např. Ananasový džus"></b-form-input>
-      <div class="ingredients-block" v-if="filteredIngredients !== [] && search">
-        <ul id="filtered-list">
-          <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
-        </ul>
+    <section v-if="main">
+      <div>
+        <b-form-input type="search" autocomplete="off" v-model.trim="search" @input="filterIngredients" placeholder="např. Ananasový džus"></b-form-input>
+        <div class="ingredients-block" v-if="filteredIngredients !== [] && search">
+          <ul id="filtered-list">
+            <li v-for="(filteredIngredient, index) in filteredIngredients" :key="index" class="filtered-ingredient" @click="setIngredient(filteredIngredient)">{{ filteredIngredient }}</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="chosen-ingredients">
-      <div v-for="(ing, index) in ingList" class="ing" :key="index">{{ ing }}
-        <div @click="removeItem" class="closes"></div>
+      <div class="chosen-ingredients">
+        <div v-for="(ing, index) in ingList" class="ing" :key="index">{{ ing }}
+          <div @click="removeItem" class="closes"></div>
+        </div>
       </div>
-    </div>
+    </section>
 
     <div class="recipes-block">
 
-      <div v-if="hiddenRecipes.length">
+      <div v-if="hiddenRecipes.length && !ingList.length">
         <div v-for="(hiddenRecipe, index) in this.hiddenRecipes" class="recipe-li" :key="index">
           <router-link v-bind:to="'/recept/' + hiddenRecipe.id"><h2 class="title">{{ hiddenRecipe.title }}</h2></router-link>
           <article class="from">od {{ hiddenRecipe.userName }}</article>
+        </div>
+      </div>
+
+      <div v-if="!ingList.length">
+        <div v-for="(recipe, index) in this.recipes" class="recipe-li" :key="index">
+          <router-link v-bind:to="'/recept/' + recipe.id"><h2 class="title">{{ recipe.title }}</h2></router-link>
+          <article class="from">od {{ recipe.userName }}</article>
         </div>
       </div>
 
@@ -53,7 +62,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['userProfile', 'currentUser', 'recipes', 'hiddenRecipes', 'posts'])
+    ...mapState(['userProfile', 'currentUser', 'recipes', 'hiddenRecipes', 'posts', 'categories']),
+    main () {
+      return this.$route.path === '/'
+    }
   },
   methods: {
     filterIngredients (input) {
@@ -86,6 +98,13 @@ export default {
   },
   created () {
     this.$store.dispatch('loadPosts')
+  },
+  watch: {
+    '$route.params.id': function (id) {
+      if (this.$route.path !== '/') {
+        console.log(id)
+      }
+    }
   }
 }
 
