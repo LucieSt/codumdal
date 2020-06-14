@@ -28,7 +28,7 @@ export default {
     ListedRecipes
   },
   name: 'Home',
-  created () {
+  created () { // probably not working anyway when using keepalive on this component
     // YouTubeIframeLoader.load(function (YT) {
     //   // eslint-disable-next-line no-new
     //   new YT.Player('player', {
