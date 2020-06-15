@@ -2,12 +2,19 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+// import Cloudinary from 'cloudinary-vue'
 
 Vue.use(VueAxios, axios)
 
 const fb = require('./../firebaseConfig.js')
 
 Vue.use(Vuex)
+
+// Vue.use(Cloudinary, {
+//   configuration: {
+//     cloudName: 'recipes'
+//   }
+// })
 
 Vue.axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com/posts'
 

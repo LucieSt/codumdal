@@ -17,6 +17,7 @@ firebase.initializeApp(config)
 const db = firebase.firestore()
 const auth = firebase.auth()
 const currentUser = auth.currentUser
+const storage = firebase.storage()
 
 // date issue fix according to firebase
 const settings = {
@@ -34,5 +35,6 @@ export {
   currentUser,
   usersCollection,
   recipesCollection,
-  categoriesCollection
+  categoriesCollection,
+  storage
 }

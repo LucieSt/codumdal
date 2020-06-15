@@ -56,6 +56,17 @@
         ></b-form-input>
         </b-form-group>
 
+        <div class="photo-upload">
+
+          <h3 class="image-upload-title">fotodokumentace:</h3>
+
+          <b-progress value="0" max="100" variant="secondary" id="uploader" class="mb-3">{{ progress }}</b-progress>
+          <b-form-file id="file-default" @change="onFileSelected"></b-form-file>
+
+        </div>
+
+        <br><br>
+
         <h3 class="categories-title">Kategorie</h3>
 
         <b-form-group id="input-group-4">
@@ -108,8 +119,14 @@
 <script>
 import { mapState } from 'vuex'
 import ingredients from '@/data/ingredients'
+import axios from 'axios'
 
 const fb = require('../firebaseConfig.js')
+
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dezbwzlqo/upload'
+const CLOUDINARY_UPLOAD_PRESET = 'ovreowbd'
+
+// const storage = require('../firebaseConfig.js')
 
 export default {
   data () {
@@ -127,7 +144,8 @@ export default {
       ingList: [],
       ingredientsNew: [],
       videoUrl: '',
-      ingredientsFind: []
+      ingredientsFind: [],
+      progress: ''
     }
   },
   computed: {
@@ -195,6 +213,49 @@ export default {
         videoID = videoID.substring(0, ampersandPosition)
       }
       return videoID
+    },
+    onFileSelected (event) {
+    //   // get file
+      const file = event.target.files[0]
+
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+
+      axios({
+        url: CLOUDINARY_URL,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: formData
+      }).then(function (res) {
+        const div = document.querySelector('.photo-upload')
+        const img = document.createElement('img')
+        img.setAttribute('src', res.data.secure_url)
+        img.classList.add('uploaded-img')
+        div.appendChild(img)
+      }).catch(function (err) {
+        console.log(err)
+      })
+
+      //   // create a storage ref
+      //   const storageRef = fb.storage().ref('images/' + file.name)
+      //   // upload file
+      //   const task = storageRef.put(file)
+      //   // update progress bar
+      //   task.on('state_changed',
+      //     function progress (snapshot) {
+      //       const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      //       this.progress = percentage
+      //     },
+      //     function error (err) {
+      //       console.log(err)
+      //     },
+      //     function complete () {
+
+      //     }
+      //   )
     }
   }
 }
