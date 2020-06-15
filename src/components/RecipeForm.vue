@@ -60,7 +60,7 @@
 
           <h3 class="image-upload-title">fotodokumentace:</h3>
 
-          <b-progress value="0" max="100" variant="secondary" id="uploader" class="mb-3">{{ progress }}</b-progress>
+          <!-- <b-progress value="0" max="100" variant="secondary" id="uploader" class="mb-3">{{ progress }}</b-progress> -->
           <b-form-file id="file-default" @change="onFileSelected"></b-form-file>
 
         </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="quantity">
               <b-form-input type="text" autocomplete="off" placeholder="množství" class="input-quantity"></b-form-input>
-              <div @click="removeItem" class="closes"></div>
+              <div @click="removeItem" class="closes closes-item"></div>
             </div>
           </div>
         </div>
@@ -215,9 +215,7 @@ export default {
       return videoID
     },
     onFileSelected (event) {
-    //   // get file
       const file = event.target.files[0]
-
       const formData = new FormData()
       formData.append('file', file)
       formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
@@ -231,31 +229,19 @@ export default {
         data: formData
       }).then(function (res) {
         const div = document.querySelector('.photo-upload')
+        const container = document.createElement('div')
+        container.classList.add('container-img-upload')
         const img = document.createElement('img')
         img.setAttribute('src', res.data.secure_url)
         img.classList.add('uploaded-img')
-        div.appendChild(img)
+        const close = document.createElement('div')
+        close.classList.add('closes', 'closes-img')
+        container.appendChild(img)
+        container.appendChild(close)
+        div.appendChild(container)
       }).catch(function (err) {
         console.log(err)
       })
-
-      //   // create a storage ref
-      //   const storageRef = fb.storage().ref('images/' + file.name)
-      //   // upload file
-      //   const task = storageRef.put(file)
-      //   // update progress bar
-      //   task.on('state_changed',
-      //     function progress (snapshot) {
-      //       const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      //       this.progress = percentage
-      //     },
-      //     function error (err) {
-      //       console.log(err)
-      //     },
-      //     function complete () {
-
-      //     }
-      //   )
     }
   }
 }

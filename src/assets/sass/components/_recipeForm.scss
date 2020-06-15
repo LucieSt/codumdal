@@ -82,7 +82,7 @@
         padding: 0;
     }
 
-    div.closes {
+    div.closes-item {
         width: 20px;
         height: 20px;
         position: absolute;
@@ -107,5 +107,46 @@
     .uploaded-img {
         max-width: 200px;
         max-height: 200px;
+    }
+
+    .container-img-upload {
+        position: relative;
+        max-width: 200px;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .closes-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+        &:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            margin-top: -1px;
+            background: #000;
+        }
+        &::before {
+            transform: rotate(45deg);
+        }
+        &::after {
+            transform: rotate(-45deg);
+        }
+        &.big {
+            transform: scale(3);
+        }
     }
 }
