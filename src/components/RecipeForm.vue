@@ -98,7 +98,7 @@
             </div>
             <div class="quantity">
               <b-form-input type="text" autocomplete="off" placeholder="množství" class="input-quantity"></b-form-input>
-              <div @click="removeItem" class="closes closes-item"></div>
+              <div @click="removeItem" class="closes"></div>
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
       ingredientsNew: [],
       videoUrl: '',
       ingredientsFind: [],
-      progress: ''
+      imgUrlList: []
     }
   },
   computed: {
@@ -235,7 +235,7 @@ export default {
         img.setAttribute('src', res.data.secure_url)
         img.classList.add('uploaded-img')
         const close = document.createElement('div')
-        close.classList.add('closes', 'closes-img')
+        close.classList.add('closes-img')
         container.appendChild(img)
         container.appendChild(close)
         div.appendChild(container)
