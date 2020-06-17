@@ -227,7 +227,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         data: formData
-      }).then(function (res) {
+      }).then(res => {
         const div = document.querySelector('.photo-upload')
         const container = document.createElement('div')
         container.classList.add('container-img-upload')
@@ -239,6 +239,7 @@ export default {
         container.appendChild(img)
         container.appendChild(close)
         div.appendChild(container)
+        this.imgUrlList.push(res.data.secure_url)
       }).catch(function (err) {
         console.log(err)
       })
