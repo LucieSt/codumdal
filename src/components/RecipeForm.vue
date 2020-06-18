@@ -60,8 +60,17 @@
 
           <h3 class="image-upload-title">fotodokumentace:</h3>
 
-          <!-- <b-progress value="0" max="100" variant="secondary" id="uploader" class="mb-3">{{ progress }}</b-progress> -->
-          <b-form-file id="file-default" @change="onFileSelected"></b-form-file>
+          <div class="photo-upload-component">
+            <photo-upload v-model="imageFile"/>
+            <photo-upload v-model="imageFile"/>
+            <photo-upload v-model="imageFile"/>
+          </div>
+
+          <!-- <div class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+            <span v-if="!imageData" class="placeholder">
+            </span>
+            <input type="file" class="file-input" ref="fileInput" @input="onFileSelected">
+          </div> -->
 
         </div>
 
@@ -119,16 +128,16 @@
 <script>
 import { mapState } from 'vuex'
 import ingredients from '@/data/ingredients'
-import axios from 'axios'
+import photoUpload from '@/components/photoUpload.vue'
 
 const fb = require('../firebaseConfig.js')
-
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dezbwzlqo/upload'
-const CLOUDINARY_UPLOAD_PRESET = 'ovreowbd'
 
 // const storage = require('../firebaseConfig.js')
 
 export default {
+  components: {
+    photoUpload
+  },
   data () {
     return {
       recipe: {
@@ -145,7 +154,7 @@ export default {
       ingredientsNew: [],
       videoUrl: '',
       ingredientsFind: [],
-      imgUrlList: []
+      imageFile: null
     }
   },
   computed: {
@@ -213,36 +222,6 @@ export default {
         videoID = videoID.substring(0, ampersandPosition)
       }
       return videoID
-    },
-    onFileSelected (event) {
-      const file = event.target.files[0]
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-
-      axios({
-        url: CLOUDINARY_URL,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        data: formData
-      }).then(res => {
-        const div = document.querySelector('.photo-upload')
-        const container = document.createElement('div')
-        container.classList.add('container-img-upload')
-        const img = document.createElement('img')
-        img.setAttribute('src', res.data.secure_url)
-        img.classList.add('uploaded-img')
-        const close = document.createElement('div')
-        close.classList.add('closes-img')
-        container.appendChild(img)
-        container.appendChild(close)
-        div.appendChild(container)
-        this.imgUrlList.push(res.data.secure_url)
-      }).catch(function (err) {
-        console.log(err)
-      })
     }
   }
 }
