@@ -74,7 +74,7 @@
 
         </div>
 
-        <br><br>
+        <br>
 
         <h3 class="categories-title">Kategorie</h3>
 
