@@ -35,18 +35,6 @@ export default {
         },
         data: formData
       }).then(res => {
-        // const div = document.querySelector('.photo-upload')
-        // const container = document.createElement('div')
-        // container.classList.add('container-img-upload')
-        // const img = document.createElement('img')
-        // img.setAttribute('src', res.data.secure_url)
-        // img.classList.add('uploaded-img')
-        // const close = document.createElement('div')
-        // close.classList.add('closes-img')
-        // container.appendChild(img)
-        // container.appendChild(close)
-        // div.appendChild(container)
-        // this.imgUrlList.push(res.data.secure_url)
         this.imageData = res.data.secure_url
         console.log(res)
       }).catch(function (err) {

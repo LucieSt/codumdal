@@ -66,12 +66,6 @@
             <photo-upload v-model="imageFile"/>
           </div>
 
-          <!-- <div class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-            <span v-if="!imageData" class="placeholder">
-            </span>
-            <input type="file" class="file-input" ref="fileInput" @input="onFileSelected">
-          </div> -->
-
         </div>
 
         <br>
