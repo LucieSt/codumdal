@@ -2,7 +2,7 @@
 <template>
   <div class="recipe-component">
     <div class="recipe-container">
-      <div id="player"></div>
+      <div id="player" v-if="recipe.videoID != null"></div>
       <h1>{{ recipe.title }}</h1>
       <article>Kategorie:</article>
       <ul>
@@ -43,7 +43,7 @@ export default {
     ...mapState(['userProfile', 'currentUser', 'recipes'])
   },
   updated () {
-    if (this.recipe.videoID) {
+    if (this.recipe.videoID && this.recipe.videoID !== null) {
       const player = YouTubePlayer('player')
       player.cueVideoById(this.recipe.videoID) // pro autoplay zamenit za loadVideoById
     }

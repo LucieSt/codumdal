@@ -61,9 +61,9 @@
           <h3 class="image-upload-title">fotodokumentace:</h3>
 
           <div class="photo-upload-component">
-            <photo-upload v-model="imageFile"/>
-            <photo-upload v-model="imageFile"/>
-            <photo-upload v-model="imageFile"/>
+            <photo-upload v-model="imageFile1"/>
+            <photo-upload v-model="imageFile2"/>
+            <photo-upload v-model="imageFile3"/>
           </div>
 
         </div>
@@ -124,6 +124,11 @@ import { mapState } from 'vuex'
 import ingredients from '@/data/ingredients'
 import photoUpload from '@/components/photoUpload.vue'
 
+import axios from 'axios'
+
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dezbwzlqo/upload'
+const CLOUDINARY_UPLOAD_PRESET = 'ovreowbd'
+
 const fb = require('../firebaseConfig.js')
 
 // const storage = require('../firebaseConfig.js')
@@ -148,7 +153,10 @@ export default {
       ingredientsNew: [],
       videoUrl: '',
       ingredientsFind: [],
-      imageFile: null
+      imageFile1: null,
+      imageFile2: null,
+      imageFile3: null,
+      imageData: []
     }
   },
   computed: {
@@ -156,6 +164,38 @@ export default {
   },
   methods: {
     createRecipe () {
+      const imgData = []
+      // cloudinary
+
+      const arr = []
+      console.log(arr)
+      arr.push(this.imageFile1, this.imageFile2, this.imageFile3)
+      console.log(arr)
+
+      arr.forEach(file => {
+        const formData = new FormData()
+        formData.append('file', file) // file from component
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+
+        axios({
+          url: CLOUDINARY_URL,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: formData
+        }).then(res => {
+          imgData.push(res.data.secure_url)
+          // this.imageData.push(res.data.secure_url)
+          // console.log(this.imageData)
+          console.log(res)
+        }).catch(function (err) {
+          console.log(err)
+        })
+      })
+
+      // cloudinary
+
       const ingreds = document.getElementsByClassName('ingredient')
       ingreds.forEach(ingred => {
         const span = ingred.querySelector('span').innerText
@@ -172,7 +212,8 @@ export default {
         ingredientsFind: this.ingredientsFind,
         userId: this.currentUser.uid,
         userName: this.userProfile.name,
-        videoID: this.getVideoID(this.videoUrl)
+        videoID: this.getVideoID(this.videoUrl),
+        imageData: imgData
       }).then(ref => {
         this.recipe = {
           title: '',
@@ -209,13 +250,17 @@ export default {
       this.ingList.splice(index, 1)
     },
     getVideoID (videoUrl) {
-      let videoID = videoUrl.split('v=')[1]
-      console.log(videoID)
-      const ampersandPosition = videoID.indexOf('&')
-      if (ampersandPosition !== -1) {
-        videoID = videoID.substring(0, ampersandPosition)
+      if (this.videoUrl) {
+        let videoID = videoUrl.split('v=')[1]
+        console.log(videoID)
+        const ampersandPosition = videoID.indexOf('&')
+        if (ampersandPosition !== -1) {
+          videoID = videoID.substring(0, ampersandPosition)
+        }
+        return videoID
+      } else {
+        return null
       }
-      return videoID
     }
   }
 }
