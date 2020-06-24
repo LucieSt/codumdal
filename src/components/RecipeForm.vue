@@ -164,7 +164,6 @@ export default {
   },
   methods: {
     createRecipe () {
-      const imgData = []
       // cloudinary
 
       const arr = []
@@ -185,7 +184,7 @@ export default {
           },
           data: formData
         }).then(res => {
-          imgData.push(res.data.secure_url)
+          this.imageData.push(res.data.secure_url)
           // this.imageData.push(res.data.secure_url)
           // console.log(this.imageData)
           console.log(res)
@@ -195,6 +194,7 @@ export default {
       })
 
       // cloudinary
+      console.log(this.imageData)
 
       const ingreds = document.getElementsByClassName('ingredient')
       ingreds.forEach(ingred => {
@@ -212,8 +212,8 @@ export default {
         ingredientsFind: this.ingredientsFind,
         userId: this.currentUser.uid,
         userName: this.userProfile.name,
-        videoID: this.getVideoID(this.videoUrl),
-        imageData: imgData
+        imageData: this.imageData,
+        videoID: this.getVideoID(this.videoUrl)
       }).then(ref => {
         this.recipe = {
           title: '',
