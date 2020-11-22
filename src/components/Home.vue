@@ -2,6 +2,9 @@
   <div class="home-component">
     <div class="home-container">
 
+      <div class="home-img">
+      </div>
+
       <h1>codůmdal</h1>
 
       <h2>Zadejte ingredience, které máte doma:</h2>
@@ -40,3 +43,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .home-img {
+    background-image: url(./../../src/assets/redkvicka.png);
+    width: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 300px;
+    position: fixed;
+    left: 0px;
+  }
+</style>
