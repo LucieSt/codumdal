@@ -9,7 +9,7 @@
     "postinstall": "rm -rf node_modules/soundcloud && git clone https://github.com/soundcloud/soundcloud-javascript.git node_modules/soundcloud"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.13.0",
     "core-js": "^3.6.4",
     "firebase": "^7.14.2",
